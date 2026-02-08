@@ -2,7 +2,7 @@ import { useState, createContext, useContext } from 'react'
 import type { ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-interface AuthContextType {
+export interface AuthContextType {
     isAuthenticated: boolean
     login: () => void
     logout: () => void

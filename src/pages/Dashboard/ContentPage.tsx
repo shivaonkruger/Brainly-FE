@@ -6,9 +6,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { Dialog } from '@/components/ui/dialog'
 import { SidebarLayout } from '@/layouts/SidebarLayout'
 import { Plus, Share2, ExternalLink, Trash2, Edit2, Youtube, Twitter, FileText } from 'lucide-react'
+import type { Thought, ContentType } from '@/types'
 
 // Dummy Data
-const INITIAL_THOUGHTS = [
+const INITIAL_THOUGHTS: Thought[] = [
     {
         id: '1',
         title: 'Understanding React Server Components',
@@ -28,16 +29,16 @@ const INITIAL_THOUGHTS = [
 ]
 
 export default function ContentPage() {
-    const [thoughts, setThoughts] = useState(INITIAL_THOUGHTS)
+    const [thoughts, setThoughts] = useState<Thought[]>(INITIAL_THOUGHTS)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [link, setLink] = useState('')
-    const [type, setType] = useState('youtube')
+    const [type, setType] = useState<ContentType>('youtube')
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        const newThought = {
+        const newThought: Thought = {
             id: Date.now().toString(),
             title,
             description,
@@ -61,16 +62,16 @@ export default function ContentPage() {
         setThoughts(thoughts.filter(t => t.id !== id))
     }
 
-    const getTypeColor = (type: string) => {
+    const getTypeColor = (type: ContentType) => {
         switch (type) {
             case 'youtube': return 'bg-youtube';
             case 'twitter': return 'bg-twitter';
-            case 'reddit': return 'bg-reddit';
+            case 'content': return 'bg-card'; // content type fallback
             default: return 'bg-card'
         }
     }
 
-    const getTypeIcon = (type: string) => {
+    const getTypeIcon = (type: ContentType) => {
         switch (type) {
             case 'youtube': return <Youtube className="h-4 w-4" />
             case 'twitter': return <Twitter className="h-4 w-4" />
@@ -148,7 +149,7 @@ export default function ContentPage() {
                         <div className="space-y-2">
                             <label className="text-sm font-medium">Type</label>
                             <div className="flex gap-2">
-                                {['youtube', 'twitter', 'content'].map(t => (
+                                {(['youtube', 'twitter', 'content'] as ContentType[]).map(t => (
                                     <button
                                         type="button"
                                         key={t}

@@ -1,19 +1,22 @@
+import type { ReactNode, ElementType } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Brain, FileText, Map, CheckSquare } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+
+interface SidebarItemProps {
+    icon: ElementType
+    label: string
+    href: string
+    isActive: boolean
+}
 
 const SidebarItem = ({
     icon: Icon,
     label,
     href,
     isActive,
-}: {
-    icon: React.ElementType
-    label: string
-    href: string
-    isActive: boolean
-}) => {
+}: SidebarItemProps) => {
     return (
         <Link to={href} className="w-full">
             <Button
@@ -30,7 +33,11 @@ const SidebarItem = ({
     )
 }
 
-export const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
+interface SidebarLayoutProps {
+    children: ReactNode
+}
+
+export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
     const location = useLocation()
 
     return (
