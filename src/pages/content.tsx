@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 
@@ -40,7 +40,7 @@ const updateContent = (id: string, data: FormState) => api.put(`/api/mybrain/${i
 const deleteContent = (id: string) => api.delete(`/api/mybrain/${id}`);
 
 // ── SOURCE META ───────────────────────────────────────────────────────────
-const sourceMeta: Record<SourceType, { label: string; color: string; icon: JSX.Element }> = {
+const sourceMeta: Record<SourceType, { label: string; color: string; icon: React.ReactNode }> = {
   twitter: {
     label: "Twitter",
     color: "#1DA1F2",
