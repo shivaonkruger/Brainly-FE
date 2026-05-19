@@ -8,6 +8,7 @@ import RoadmapList from './pages/RoadmapList';
 import RoadmapDetail from './pages/RoadmapDetails';
 import Todo from './pages/todo';
 import './App.css';
+import Landing from './pages/landingpage';
 
 
 const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Landing />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/dashboard" element={<Dashboard />} />
